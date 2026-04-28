@@ -1,4 +1,3 @@
-```js
 const express = require('express');
 const http = require('http');
 const socketIO = require('socket.io');
@@ -13,11 +12,10 @@ const os = require('os');
 const https = require('https');
 require('dotenv').config();
 
-/* ✅ FIX 1: DEFINE APP FIRST */
 const app = express();
 const server = http.createServer(app);
 
-/* ✅ FIX 2: SINGLE CLEAN CORS (VERY IMPORTANT) */
+// Enable CORS for all origins for initial deployment
 app.use(cors({
     origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -37,12 +35,8 @@ const PORT = process.env.PORT || 3001;
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
 const RSA_KEY_SIZE = 2048;
 
-/* ================= YOUR EXISTING CODE BELOW (UNCHANGED) ================= */
+/* ================= VPN LOGIC ================= */
 
-/* ❗ DO NOT CHANGE ANYTHING BELOW THIS LINE */
-/* (all your VPN logic stays same) */
-
-```
 
 
 const VPN_SERVERS = [
@@ -71,14 +65,7 @@ const userServerSelection = new Map();
 const userProtocolSelection = new Map();
 const connectionLogs = new Map();
 
-app.use(cors({
-    origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-}));
-app.options('*', cors()); // handle preflight for all routes
-app.use(express.json());
+
 
 // ===== REAL NETWORK UTILITIES =====
 function measureTCPLatency(host, port = 443) {
