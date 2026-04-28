@@ -11,7 +11,8 @@ const dns = require('dns').promises;
 const os = require('os');
 const https = require('https');
 require('dotenv').config();
-
+const cors = require('cors');
+app.use(cors());
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server, { cors: { origin: '*', methods: ['GET', 'POST'] } });
