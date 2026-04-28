@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import axios from 'axios';
 import './NetworkMonitor.css';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
+const API_BASE = process.env.REACT_APP_API_URL || 'https://nexvpn.onrender.com/api';
 
 const VPN_SERVERS = [
     { id: 'us-east',   name: 'US East',    city: 'New York',    flag: '🇺🇸' },
