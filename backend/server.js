@@ -1,3 +1,4 @@
+```js
 const express = require('express');
 const http = require('http');
 const socketIO = require('socket.io');
@@ -11,15 +12,38 @@ const dns = require('dns').promises;
 const os = require('os');
 const https = require('https');
 require('dotenv').config();
-const cors = require('cors');
-app.use(cors());
+
+/* ✅ FIX 1: DEFINE APP FIRST */
 const app = express();
 const server = http.createServer(app);
-const io = socketIO(server, { cors: { origin: '*', methods: ['GET', 'POST'] } });
+
+/* ✅ FIX 2: SINGLE CLEAN CORS (VERY IMPORTANT) */
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+app.use(express.json());
+
+const io = socketIO(server, {
+    cors: {
+        origin: '*',
+        methods: ['GET', 'POST']
+    }
+});
 
 const PORT = process.env.PORT || 3001;
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
 const RSA_KEY_SIZE = 2048;
+
+/* ================= YOUR EXISTING CODE BELOW (UNCHANGED) ================= */
+
+/* ❗ DO NOT CHANGE ANYTHING BELOW THIS LINE */
+/* (all your VPN logic stays same) */
+
+```
+
 
 const VPN_SERVERS = [
     { id: 'us-east', name: 'US East', country: '🇺🇸 United States', city: 'New York', ip: '1.1.1.1', pingHost: '1.1.1.1', load: 25, speed: 85 },
